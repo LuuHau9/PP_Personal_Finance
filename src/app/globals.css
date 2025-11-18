@@ -43,7 +43,7 @@
 }
 
 body {
-  background: #aaa;
+  background: var(--color-background);
   color: #aaa;
   font-family: "Public Sans", sans-serif;
 }
