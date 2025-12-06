@@ -14,7 +14,7 @@
   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
+  --color-sidebar: var(--color-grey-900);
   --color-chart-5: var(--chart-5);
   --color-chart-4: var(--chart-4);
   --color-chart-3: var(--chart-3);
@@ -44,8 +44,11 @@
 }
 
 @theme {
-  --color-primary: #98908b;
-  --color-primary-light: #f8f4f0;
+  --color-primary: #201f24;
+  --color-secondary: #98908b;
+
+  --color-beige-500: #98908b;
+  --color-beige-100: #f8f4f0;
 
   --color-grey-900: #201f24;
   --color-grey-500: #696868;
@@ -77,9 +80,9 @@ body {
 }
 
 :root {
-  --primary: #98908b;
+  --primary: var(--color-primary);
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: var(--color-primary-light);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -103,10 +106,10 @@ body {
   --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary: var(--color-grey-300);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-accent-foreground: oklch(0.145 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 }
@@ -156,24 +159,24 @@ body {
 
 @layer components {
   .text-present-1 {
-    @apply font-bold text-4xl leading-[1.2] tracking-normal;
+    @apply font-bold text-4xl leading-[1.2] tracking-normal text-grey-900;
   }
   .text-present-2 {
-    @apply font-bold text-xl leading-[1.2] tracking-normal;
+    @apply font-bold text-xl leading-[1.2] tracking-normal text-grey-900;
   }
   .text-present-3 {
-    @apply font-bold text-base leading-[1.5] tracking-normal;
+    @apply font-bold text-base leading-[1.5] tracking-normal text-grey-900;
   }
   .text-present-4 {
-    @apply font-normal text-sm leading-[1.5] tracking-normal;
+    @apply font-normal text-sm leading-[1.5] tracking-normal text-grey-900;
   }
   .text-present-5 {
-    @apply font-normal text-xs leading-[1.5] tracking-normal;
+    @apply font-normal text-xs leading-[1.5] tracking-normal text-grey-900;
   }
   .text-present-4-bold {
-    @apply font-bold text-sm leading-[1.5] tracking-normal;
+    @apply font-bold text-sm leading-[1.5] tracking-normal text-grey-900;
   }
   .text-present-5-bold {
-    @apply font-bold text-xs leading-[1.5] tracking-normal;
+    @apply font-bold text-xs leading-[1.5] tracking-normal text-grey-900;
   }
 }

@@ -1,0 +1,31 @@
+export enum PotTheme {
+  GREEN = "green",
+  YELLOW = "yellow",
+  CYAN = "cyan",
+  NAVY = "navy",
+  RED = "red",
+  PURPLE = "purple",
+  TURQUOISE = "turquoise",
+  BROWN = "brown",
+  MAGENTA = "magenta",
+  BLUE = "blue",
+  ARMY = "army",
+  GOLD = "gold",
+  ORANGE = "orange",
+}
+
+export const THEME_CLASSES = {
+  [PotTheme.GREEN]: "bg-secondary-green",
+  [PotTheme.YELLOW]: "bg-secondary-yellow",
+  [PotTheme.CYAN]: "bg-secondary-cyan",
+  [PotTheme.NAVY]: "bg-secondary-navy",
+  [PotTheme.RED]: "bg-secondary-red",
+  [PotTheme.PURPLE]: "bg-secondary-purple",
+  [PotTheme.TURQUOISE]: "bg-turquoise",
+  [PotTheme.BROWN]: "bg-brown",
+  [PotTheme.MAGENTA]: "bg-magenta",
+  [PotTheme.BLUE]: "bg-blue",
+  [PotTheme.ARMY]: "bg-army",
+  [PotTheme.GOLD]: "bg-gold",
+  [PotTheme.ORANGE]: "bg-orange",
+} as const;
