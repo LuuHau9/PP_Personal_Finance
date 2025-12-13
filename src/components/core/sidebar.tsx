@@ -1,28 +1,13 @@
 "use client";
 
-import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import {
-  ArrowBigRightDash,
-  ArrowBigRightDashIcon,
-  PanelLeftClose,
-  PanelLeftIcon,
-  PanelLeftOpen,
-} from "lucide-react";
+import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import * as React from "react";
 
-import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/core/button";
 import { Input } from "@/components/core/input";
 import { Separator } from "@/components/core/separator";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/core/sheet";
 import { Skeleton } from "@/components/core/skeleton";
 import {
   Tooltip,
@@ -30,6 +15,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/core/tooltip";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -188,26 +175,34 @@ function Sidebar({
 
   if (isMobile) {
     return (
-      <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
-        <SheetContent
-          data-sidebar="sidebar"
-          data-slot="sidebar"
-          data-mobile="true"
-          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
-          style={
-            {
-              "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
-            } as React.CSSProperties
-          }
-          side={side}
-        >
-          <SheetHeader className="sr-only">
-            <SheetTitle>Sidebar</SheetTitle>
-            <SheetDescription>Displays the mobile sidebar.</SheetDescription>
-          </SheetHeader>
-          <div className="flex h-full w-full flex-col">{children}</div>
-        </SheetContent>
-      </Sheet>
+      <div
+        data-mobile="true"
+        className="fixed bottom-0 left-0 right-0 translate-z-0 w-full bg-black z-50 h-16 flex flex-row "
+        {...props}
+      >
+        {children}
+      </div>
+      // <div></div>
+      // <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
+      //   <SheetContent
+      //     data-sidebar="sidebar"
+      //     data-slot="sidebar"
+      //     data-mobile="true"
+      //     className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden"
+      //     style={
+      //       {
+      //         "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
+      //       } as React.CSSProperties
+      //     }
+      //     side={side}
+      //   >
+      //     <SheetHeader className="sr-only">
+      //       <SheetTitle>Sidebar</SheetTitle>
+      //       <SheetDescription>Displays the mobile sidebar.</SheetDescription>
+      //     </SheetHeader>
+      //     <div className="flex h-full w-full flex-col">{children}</div>
+      //   </SheetContent>
+      // </Sheet>
     );
   }
 
@@ -282,14 +277,8 @@ function SidebarTrigger({
       }}
       {...props}
     >
-      <PanelLeftOpen
-        size={"20px"}
-        className="hidden group-data-[collapsible=icon]:block"
-      />
-      <PanelLeftClose
-        size={"20px"}
-        className="block group-data-[collapsible=icon]:hidden"
-      />
+      <PanelLeftOpen className="hidden group-data-[collapsible=icon]:block size-6" />
+      <PanelLeftClose className="block group-data-[collapsible=icon]:hidden size-6" />
       <span className="block group-data-[collapsible=icon]:hidden">
         Minimize menu
       </span>
@@ -355,7 +344,7 @@ function SidebarHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="sidebar-header"
       data-sidebar="header"
-      className={cn("flex flex-col gap-2 p-2", className)}
+      className={cn("hidden md:flex flex-col gap-2 p-2 ", className)}
       {...props}
     />
   );
@@ -366,7 +355,7 @@ function SidebarFooter({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="sidebar-footer"
       data-sidebar="footer"
-      className={cn("flex flex-col gap-2 p-2 pb-4", className)}
+      className={cn("hidden md:flex flex-col gap-2 p-2 pb-4", className)}
       {...props}
     />
   );
@@ -392,7 +381,7 @@ function SidebarContent({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="sidebar-content"
       data-sidebar="content"
       className={cn(
-        "flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden",
+        "flex min-h-0 flex-1 flex-row md:flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden",
         className,
       )}
       {...props}
@@ -474,7 +463,10 @@ function SidebarMenu({ className, ...props }: React.ComponentProps<"ul">) {
     <ul
       data-slot="sidebar-menu"
       data-sidebar="menu"
-      className={cn("flex w-full min-w-0 flex-col gap-1", className)}
+      className={cn(
+        "flex w-full min-w-0 flex-row justify-around md:justify-stretch md:flex-col gap-1",
+        className,
+      )}
       {...props}
     />
   );
@@ -492,7 +484,7 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 m-1 pl-7 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,height,padding] hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-accent-foreground group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-1.5! group-data-[collapsible=icon]:[&>span:last-child]:hidden [&>svg]:size-5 [&>svg]:shrink-0 hover:[&>svg]:text-secondary-green",
+  "peer/menu-button flex justify-center md:justify-start align-center w-full items-center gap-2 overflow-hidden rounded-t-md md:rounded-r-md m-1 py-2.5 px-6 md:p-2 md:pl-6.5 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[active=true]:border-b-5 md:data-[active=true]:border-l-5 data-[active=true]:border-secondary-green data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-accent-foreground group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-1.5! group-data-[collapsible=icon]:[&>span:last-child]:hidden [&>span:last-child]:hidden md:[&>span:last-child]:inline  [&>svg]:size-6 [&>svg]:shrink-0 hover:[&>svg]:text-secondary-green data-[active=true]:[&>svg]:text-secondary-green",
   {
     variants: {
       variant: {
@@ -503,7 +495,7 @@ const sidebarMenuButtonVariants = cva(
       size: {
         default: "h-8 text-sm",
         sm: "h-7 text-xs",
-        lg: "h-12 text-sm group-data-[collapsible=icon]:p-1.5!",
+        lg: "h-12 text-present-3 text-grey-300 group-data-[collapsible=icon]:p-1.5!",
       },
     },
     defaultVariants: {

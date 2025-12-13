@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <>
       <PageHeader
-        title="Pots"
+        title="Overview"
         actions={
           <Button>
             <Plus />
@@ -16,20 +16,6 @@ export default function Page() {
           </Button>
         }
       />
-      <div className="grid grid-cols-2 gap-6">
-        <PotCard
-          name="Saving"
-          theme={PotTheme.BROWN}
-          target={1200}
-          totalSave={900}
-        />
-        <PotCard
-          name="Saving"
-          theme={PotTheme.BROWN}
-          target={1200}
-          totalSave={900}
-        />
-      </div>
     </>
   );
 }

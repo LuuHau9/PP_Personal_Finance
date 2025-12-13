@@ -32,31 +32,31 @@ const data = {
   navMain: [
     {
       title: "Overview",
-      url: "#",
+      url: "/overview",
       icon: House,
       isActive: true,
     },
     {
       title: "Transactions",
-      url: "#",
+      url: "/transactions",
       icon: ArrowDownUp,
       isActive: true,
     },
     {
       title: "Budgets",
-      url: "#",
+      url: "/budgets",
       icon: ChartPie,
       isActive: true,
     },
     {
       title: "Pots",
-      url: "#",
+      url: "/pots",
       icon: PiggyBank,
       isActive: true,
     },
     {
       title: "Recurring bills",
-      url: "#",
+      url: "/recurring-bills",
       icon: Receipt,
       isActive: true,
     },
